@@ -209,7 +209,7 @@ function App() {
               <h1>Project By:</h1>
               <ul>
                 <li>1928019 Arnab Chatterjee</li>
-                <li>1928021 Ayantika Bhowmik</li>
+                <li>1928021 Ayantika Bhaumik</li>
                 <li>1928043 Patrali Sarkar</li>
                 <li>1928045 Pratyay Saha</li>
                 <li>1928066 Swagata Chanda</li>
