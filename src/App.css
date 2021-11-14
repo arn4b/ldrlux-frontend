@@ -1,20 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
 .App {
-  padding: 1rem;
-  margin: 1rem;
+  font-family: 'DM Sans', sans-serif;
+  background: linear-gradient(135deg, rgba(235,137,255,1) 0%, rgba(157,235,255,1) 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-family: 'DM Sans', sans-serif;
 }
 
 .text {
   text-align: center;
-}
-
-.App-header {
-  background-color: #ffffff;
-  /* min-height: 100vh; */
-  display: flex;
-  flex-direction: row;
+  font-weight: 600;
+  margin-top: 2rem;
 }
 
 .chart1 {
-  width: 50%;
-  
+  border: 2px black solid;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 80%;
+}
+
+.led-button {
+  width: 200px;
+  margin: 0 2rem;
+}
+
+.led-console {
+  display: flex;
+  /* width: 50%; */
+  margin: 1rem auto;
+  padding: 2rem;
+  border: 2px solid black;
+  border-radius: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.mem-list {
+  font-size: 2rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+
+}
+
+.docs{
+  font-size: 2rem !important;
+  justify-content: space-evenly;
 }
