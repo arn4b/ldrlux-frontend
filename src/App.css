@@ -49,12 +49,14 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  /* align-items: center; */
 
 }
 
 .docs{
   font-size: 2rem !important;
   justify-content: space-evenly;
+}
+
+.table {
+  font-size: 1.5rem;
 }

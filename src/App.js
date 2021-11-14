@@ -6,8 +6,8 @@ import moment from "moment"
 
 import ToggleButton from "react-bootstrap/ToggleButton"
 
-import { Line, Scatter } from "react-chartjs-2"
-import { Col, Container, Row } from "react-bootstrap"
+import { Line } from "react-chartjs-2"
+import { Col, Container, Row, Table } from "react-bootstrap"
 
 const { io } = require("socket.io-client")
 
@@ -22,11 +22,9 @@ function App() {
 
 	const [ledStatus, setLedStatus] = useState([])
 
-	const [chartData, setChartData] = useState({})
+	const [realtime, setRealtime] = useState(false)
 
-  const [realtime, setRealtime] = useState(false)
-
-  const [rtData, setRtData] = useState({})
+	const [rtData, setRtData] = useState({})
 
 
 	useEffect(() => {
@@ -50,10 +48,14 @@ function App() {
 		})
 	}, [])
 
+
+
 	useEffect(() => {
 		console.log(sensorData)
 		console.log(sensorData.map(({ data }) => data))
 	}, [sensorData])
+
+
 
 	useEffect(() => {
 		socket.on("connect", () => {
@@ -74,25 +76,18 @@ function App() {
 		})
 	}, [socket])
 
+
+
 	useEffect(() => {
 		console.log(ledStatus)
 	}, [ledStatus])
 
-	const getRandomColor = () => {
-		var letters = "0123456789ABCDEF"
-		var color = "#"
-		for (var i = 0; i < 6; i++) {
-			color += letters[Math.floor(Math.random() * 16)]
-		}
-		return color
-	}
-
   
-  useEffect(() => {
-    if (realtime) {
-      setSensorData((cur) => [...cur, rtData])
-    }
-  }, [realtime, rtData])
+	useEffect(() => {
+		if (realtime) {
+		setSensorData((cur) => [...cur, rtData])
+		}
+	}, [realtime, rtData])
 
 
 	const data = {
@@ -104,23 +99,23 @@ function App() {
 				label: "Intensity of Light",
 				data: [...sensorData.map(({ data }) => data)],
 				fill: false,
-				backgroundColor: getRandomColor(),
-				borderColor: getRandomColor(),
+				backgroundColor: 'rgb(114, 0, 0)',
+				borderColor: 'rgba(114, 0, 0, 0.638)',
 			},
 		],
 	}
 
-  const leddata = {
+	const leddata = {
 		labels: [
 			...ledStatus.map(({ timestamp }) => moment(timestamp).format("LLL")),
 		],
 		datasets: [
 			{
-				label: "Intensity of Light",
+				label: "LED Status",
 				data: [...ledStatus.map(({ data }) => (data === "ON" ? 1 : 0))],
 				fill: false,
-				backgroundColor: getRandomColor(),
-				borderColor: getRandomColor(),
+				backgroundColor: 'rgb(114, 0, 0)',
+				borderColor: 'rgba(114, 0, 0, 0.638)',
 			},
 		],
 	}
@@ -149,27 +144,27 @@ function App() {
 			</div>
 			<header className='App-header'>
 				<div className='chart1'>
-          <h1 style={{textAlign: 'center'}}>Intensity vs Time Chart</h1>
+          			<h1 style={{textAlign: 'center'}}>Intensity vs Time Chart</h1>
 					<Line data={data} options={options} />
 				</div>
 
-        <div className="led-console" style={{width: '50%'}}>
-          <h3>Sensor Capture Toggle</h3>
+				<div className="led-console" style={{width: '50%'}}>
+				<h3>Sensor Capture Toggle</h3>
 
-          <ToggleButton
-            className='mb-2 led-button'
-            id='toggle-check1'
-            type='checkbox'
-            variant='outline-success'
-            size='lg'
-            checked={realtime}
-            onChange={(e) => setRealtime(e.currentTarget.checked)}
-          >
-            {realtime ? "Turn off capture" : "Turn on capture"}
-          </ToggleButton>
-        </div>
+				<ToggleButton
+					className='mb-2 led-button'
+					id='toggle-check1'
+					type='checkbox'
+					variant='outline-success'
+					size='lg'
+					checked={realtime}
+					onChange={(e) => setRealtime(e.currentTarget.checked)}
+				>
+					{realtime ? "Turn off capture" : "Turn on capture"}
+				</ToggleButton>
+				</div>
 
-        <div className='chart1'>
+				<div className='chart1'>
 					<Line data={leddata} options={options} />
 				</div>
 			</header>
@@ -222,15 +217,57 @@ function App() {
             <div>
               <h1>Documentation and Source Code:</h1>
               <div className="docs">
-                <a href="https://github.com/arn4b/ldrlux-frontend"><p>Frontend Source Code</p></a>
-                <a href="https://github.com/pratyaysaha?tab=repositories"><p>MQTT Python Source Code</p></a>
-                <a href="https://github.com/swagatachanda/iotProject"><p>Backend Source Code</p></a>
-                <a href="https://documenter.getpostman.com/view/14983874/UVC3koRP"><p>API Documentation</p></a>
-                <a href="https://hackmd.io/@psaha/iotproject"><p>Project Documentation</p></a>
+                <a target="__blank" href="https://github.com/arn4b/ldrlux-frontend"><p>Frontend Source Code</p></a>
+                <a target="__blank" href="https://github.com/swagatachanda/iotProject/blob/master/iotScripts/iotmqtt.py"><p>MQTT Python Source Code</p></a>
+                <a target="__blank" href="https://github.com/swagatachanda/iotProject"><p>Backend Source Code</p></a>
+                <a target="__blank" href="https://documenter.getpostman.com/view/14983874/UVC3koRP"><p>API Documentation</p></a>
+                <a target="__blank" href="https://hackmd.io/@psaha/iotproject"><p>Project Documentation</p></a>
               </div>
             </div>
           </Col>
         </Row>
+
+		<div>
+			<h1>Tech Stack Used:</h1>
+
+			<Table striped borderless hover style={{textAlign: 'center'}} className="tablee">
+				<thead>
+					<tr>
+					<th>Frontend</th>
+					<th>Backend</th>
+					<th>Database</th>
+					<th>IOT</th>
+					<th>Deployment</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					
+					<td>ReactJS</td>
+					<td>NodeJS</td>
+					<td>MongoDB</td>
+					<td>Mosquito MQTT</td>
+					<td>DigitalOcean</td>
+					</tr>
+					<tr>
+					
+					<td>ChartJS</td>
+					<td>SocketIO</td>
+					<td>-</td>
+					<td>-</td>
+					<td>Heroku</td>
+					</tr>
+					<tr>
+					
+					<td>React Bootstrap</td>
+					<td>Python (Arduino)</td>
+					<td>-</td>
+					<td>-</td>
+					<td>Cloudflare Pages</td>
+					</tr>
+				</tbody>
+			</Table>
+		</div>
       </Container>
 
 
