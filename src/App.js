@@ -16,9 +16,7 @@ function App() {
 
 	const [sensorData, setSensorData] = useState([])
 
-	const [socket, setSocket] = useState(
-		io(`https://iotgroupproject.herokuapp.com/`)
-	)
+	const [socket, setSocket] = useState(io(`https://iotgroupproject.herokuapp.com/`))
 
 	const [ledStatus, setLedStatus] = useState([])
 
